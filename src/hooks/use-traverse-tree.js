@@ -21,9 +21,26 @@ const useTraverseTree = () => {
       return { ...tree, items: latestNode };
     };
   
-    const deleteNode = () => {}; // Do it Yourself
+    const deleteNode = function (tree, folderId, item, isFolder) {
+        if (tree.id === folderId && tree.isFolder) {
+          tree.items.shift({
+            id:new Date().getTime(),
+            name: item,
+            isFolder: isFolder,
+            items: []
+          });
+    
+          return tree;
+        }
+          let latestNode = [];
+          latestNode = tree.items.map((ob) => {
+            return insertNode(ob, folderId, item, isFolder);
+          });
+      
+          return { ...tree, items: latestNode };
+        };
   
-    const renameNode = () => {}; // Do it Yourself
+    const renameNode = () => {}; 
   
     return { insertNode, deleteNode, renameNode };
   };
