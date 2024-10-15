@@ -14,6 +14,13 @@ function Folder({ explorer }) {
       isFolder,
     });
   };
+
+  const onAddFolder = (e) => {
+    if(e.keyCode === 13 && e.target.value){
+      handleInsertNode(explorer.id, e.target.value, showInput.isFolder);
+      setShowInput({...showInput,visible:false});
+    }
+  }
   if (explorer.isFolder) {
     return (
       <div style={{ marginTop: 5 }}>
@@ -38,6 +45,7 @@ function Folder({ explorer }) {
               <span>{showInput.isFolder ? '📁' : '📄'}</span>
               <input
                 className="inputContainer__input"
+                onKeyDown={onAddFolder}
                 autoFocus
                 type="text"
                 onBlur={() => setShowInput({ ...showInput, visible: false })}
